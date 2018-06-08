@@ -8,4 +8,4 @@ var veganFoodService = {};
 
 veganFoodService.getFoodTypes = function() {
     return Object.keys(veganfoodList);
-}
+}   
