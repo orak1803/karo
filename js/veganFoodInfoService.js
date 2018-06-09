@@ -1,5 +1,5 @@
 
-var veganfoodList = {
+var veganFoodList = {
     'pita':     171,
     'banana':   135
 };
@@ -7,5 +7,9 @@ var veganfoodList = {
 var veganFoodService = {};
 
 veganFoodService.getFoodTypes = function() {
-    return Object.keys(veganfoodList);
-}   
+    return Object.keys(veganFoodList);
+}
+
+veganFoodService.getCaloriesByFood = function(food) {
+    return veganFoodList[food];
+}

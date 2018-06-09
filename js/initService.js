@@ -1,10 +1,13 @@
 
 var leftContainer,
 foodList,
-inputList = [],
+inputList = {},
 inputSteps,
 calcBtn,
-rightContainer;
+rightContainer,
+resultContainer,
+resultLabel,
+comapreLabel;
 
 
 function createFoodPicker(){
@@ -21,14 +24,14 @@ function fillList(element){
     var item = document.createElement('li');
     item.classList.add('item');
     var itemTitle = document.createElement('span');
-    itemTitle.classList.add('itemTitle');
-    inputList.push(document.createElement('input'));
-    var index = inputList.length - 1;
-    inputList[index].classList.add('itemInput');
     itemTitle.innerHTML = element;
-    inputList[index].type = "text";
+    itemTitle.classList.add('itemTitle');
+    inputList[element] = document.createElement('input');
+    inputList[element].classList.add('itemInput');
+    inputList[element].type = "text";
+    inputList[element].placeholder = element + ' amount';
     item.appendChild(itemTitle);
-    item.appendChild(inputList[index]);
+    item.appendChild(inputList[element]);
     foodList.appendChild(item);
 }
 
@@ -42,15 +45,14 @@ function createFootStepsPicker(){
     inputSteps = document.createElement('input');
     inputSteps.id = 'stepsInput';
     inputSteps.type = 'text';
+    inputSteps.placeholder = 'Steps amount';
 
     calcBtn = document.createElement('button');
     calcBtn.classList.add('button');
     calcBtn.classList.add('b1');
     calcBtn.id = 'calcBtn';
     calcBtn.innerHTML = 'compare';
-    calcBtn.addEventListener('click', function (){
-        calcBtn.style.color = 'red';
-    });
+    calcBtn.addEventListener('click', CompareCalories);
 
     container.appendChild(label);
     container.appendChild(inputSteps);
@@ -58,7 +60,46 @@ function createFootStepsPicker(){
     return container;
 }
 
+function CompareCalories() {
+    var caloriesEaten = calcCaloriesEaten().toFixed(3);
+    var caloriesBurned = calcCaloriesBurned().toFixed(3);
+
+    if(caloriesEaten > caloriesBurned){
+        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' > ' + caloriesBurned + 'kcal';
+        resultLabel.innerHTML = 'You are fat';
+    }
+    else if(caloriesEaten < caloriesBurned){
+        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' < ' + caloriesBurned + 'kcal';
+        resultLabel.innerHTML = 'nice work';
+    }
+    else {
+        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' = ' + caloriesBurned + 'kcal';
+        resultLabel.innerHTML = 'ahhhh keep working';
+    }
+}
+
+function calcCaloriesEaten() {
+    var ans = 0;
+    veganFoodService.getFoodTypes().forEach(function(veganFood){
+        ans += calcService.calcByFoodAmount(veganFoodService.getCaloriesByFood(veganFood), inputList[veganFood].value);
+    });
+    meatFoodService.getFoodTypes().forEach(function(meatFood){
+        ans += calcService.calcByFoodAmount(meatFoodService.getCaloriesByFood(meatFood), inputList[meatFood].value);
+    });
+    console.log('Left ans = ' + ans);
+    return ans;
+}
+
+function calcCaloriesBurned() {
+    var ans = 0;
+    ans += calcService.calcSteps(inputSteps.value);
+    console.log('Right ans = ' + ans);
+    return ans;
+}
+
 window.onload = function() {
+    resultLabel = document.getElementById('resultLabel');
+    comapreLabel = document.getElementById('compareLabel');
 
     leftContainer = document.getElementById('leftContainer');
     var foodPickerContainer = createFoodPicker();

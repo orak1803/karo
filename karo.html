@@ -8,9 +8,10 @@
         <!-- <script src="./js/styleService.js"></script> -->
         <script src="./js/meatFoodInfoService.js"></script>
         <script src="./js/veganFoodInfoService.js"></script>
+        <script src="./js/calculatorService.js"></script>
         <script src="./js/initService.js"></script>
         <!-- Title -->
-        <title>Karo calorie calculator</title>
+        <title>Karo calories calculator</title>
     </head>
     <body>
         <header id="header">
@@ -27,6 +28,11 @@
             <div style="clear: both;"></div>
             <div id="resultContainer" >
                 <h2 class="center">Result</h2>
+                <div id="labelContainer">
+                    <span id="compareLabel"></span>
+                    <br>
+                    <span id="resultLabel"></span>
+                </div>
             </div>
             <div style="clear: both;"></div>
             <!-- one step is 0.05kcal -->

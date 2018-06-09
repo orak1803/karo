@@ -38,6 +38,11 @@ ul {
     height: 27vh;
 }
 
+#labelContainer {
+    width: 100%;
+    text-align: center;
+}
+
 #stepsLabel {
     display: block;
     margin-top: 32px;
@@ -47,6 +52,8 @@ ul {
     display: block;
     margin: 8px auto 0 auto;
     width: 128px;
+    height: 16px;
+    text-align: center;
 }
 
 #calcBtn {
