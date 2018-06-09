@@ -4,6 +4,7 @@ foodList,
 inputList = {},
 inputSteps,
 calcBtn,
+comapreContainer,
 rightContainer,
 resultContainer,
 resultLabel,
@@ -35,6 +36,16 @@ function fillList(element){
     foodList.appendChild(item);
 }
 
+function createComapreButton(){
+    calcBtn = document.createElement('button');
+    calcBtn.classList.add('button');
+    calcBtn.classList.add('b1');
+    calcBtn.id = 'calcBtn';
+    calcBtn.innerHTML = 'compare';
+    calcBtn.addEventListener('click', CompareCalories);
+    return calcBtn;
+}
+
 function createFootStepsPicker(){
     var container = document.createElement('div');
     container.style.textAlign = 'center';
@@ -47,35 +58,28 @@ function createFootStepsPicker(){
     inputSteps.type = 'text';
     inputSteps.placeholder = 'Steps amount';
 
-    calcBtn = document.createElement('button');
-    calcBtn.classList.add('button');
-    calcBtn.classList.add('b1');
-    calcBtn.id = 'calcBtn';
-    calcBtn.innerHTML = 'compare';
-    calcBtn.addEventListener('click', CompareCalories);
-
     container.appendChild(label);
     container.appendChild(inputSteps);
-    container.appendChild(calcBtn);
     return container;
 }
 
 function CompareCalories() {
-    var caloriesEaten = calcCaloriesEaten().toFixed(2);
-    var caloriesBurned = calcCaloriesBurned().toFixed(2);
-
+    var caloriesEaten = Number(calcCaloriesEaten());
+    var caloriesBurned = Number(calcCaloriesBurned());
+    var sign = '';
     if(caloriesEaten > caloriesBurned){
-        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' > ' + caloriesBurned + 'kcal';
+        sign = '>';
         resultLabel.innerHTML = 'You are fat';
     }
     else if(caloriesEaten < caloriesBurned){
-        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' < ' + caloriesBurned + 'kcal';
+        sign = '<';
         resultLabel.innerHTML = 'nice work';
     }
     else {
-        comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' = ' + caloriesBurned + 'kcal';
+        sign = '=';
         resultLabel.innerHTML = 'ahhhh keep working';
     }
+    comapreLabel.innerHTML = caloriesEaten.toFixed(2) + 'kcal' + ' ' + sign + ' ' + caloriesBurned.toFixed(2) + 'kcal';
 }
 
 function calcCaloriesEaten() {
@@ -104,10 +108,21 @@ window.onload = function() {
     leftContainer = document.getElementById('leftContainer');
     var foodPickerContainer = createFoodPicker();
 
+    comapreContainer = document.getElementById('comapreContainer');
+    var comapreButton = createComapreButton();
+    var position = ((window.innerWidth / 2.0) - 98.23/2.0);
+    comapreContainer.style.left =  position + 'px';  
+
     rightContainer = document.getElementById('rightContainer');
     var stepPicker = createFootStepsPicker();
 
     leftContainer.appendChild(foodPickerContainer);
+    comapreContainer.appendChild(comapreButton);
     rightContainer.appendChild(stepPicker)
 
+}
+
+window.onresize = function (){
+    var position = ((window.innerWidth / 2.0) - 98.23/2.0);
+    comapreContainer.style.left =  position + 'px';
 }

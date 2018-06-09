@@ -23,6 +23,12 @@ ul {
     height: 200px;
 }
 
+#comapreContainer {
+    position: fixed;
+    top: 200px;
+
+}
+
 #rightContainer {
     background-color: azure;
     float: left;
@@ -35,7 +41,7 @@ ul {
     overflow: auto; 
     margin: 0 auto;
     width: 33%;
-    height: 200px;
+    height: 128px;
 }
 
 #labelContainer {
@@ -45,7 +51,7 @@ ul {
 
 #stepsLabel {
     display: block;
-    margin-top: 32px;
+    margin-top: 64px;
 }
 
 #stepsInput {
