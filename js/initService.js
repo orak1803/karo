@@ -61,8 +61,8 @@ function createFootStepsPicker(){
 }
 
 function CompareCalories() {
-    var caloriesEaten = calcCaloriesEaten().toFixed(3);
-    var caloriesBurned = calcCaloriesBurned().toFixed(3);
+    var caloriesEaten = calcCaloriesEaten().toFixed(2);
+    var caloriesBurned = calcCaloriesBurned().toFixed(2);
 
     if(caloriesEaten > caloriesBurned){
         comapreLabel.innerHTML = caloriesEaten + 'kcal' + ' > ' + caloriesBurned + 'kcal';

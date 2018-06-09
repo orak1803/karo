@@ -20,14 +20,14 @@ ul {
     background-color: aquamarine;
     float: left;
     width: 50%;
-    height: 27vh;
+    height: 200px;
 }
 
 #rightContainer {
     background-color: azure;
     float: left;
     width: 50%;
-    height: 27vh;
+    height: 200px;
 }
 
 #resultContainer {
@@ -35,7 +35,7 @@ ul {
     overflow: auto; 
     margin: 0 auto;
     width: 33%;
-    height: 27vh;
+    height: 200px;
 }
 
 #labelContainer {
