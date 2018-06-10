@@ -62,6 +62,19 @@ ul {
     text-align: center;
 }
 
+#metersLabel {
+    display: block;
+    margin-top: 14px;
+}
+
+#metersInput {
+    display: block;
+    margin: 8px auto 0 auto;
+    width: 128px;
+    height: 16px;
+    text-align: center;
+}
+
 #calcBtn {
     margin-top: 16px;
 }
